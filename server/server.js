@@ -157,6 +157,10 @@ app.get('/api/popular-tv', async (req, res) => {
   }
 });
 
+app.get('/', (req, res) => {
+  res.send('CineFind API is running successfully!');
+});
+
 app.listen(PORT, () => {
   console.log(`CineFind API server running at http://localhost:${PORT}`);
 });
