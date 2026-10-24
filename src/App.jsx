@@ -36,6 +36,10 @@ import { Routes, Route, Link } from 'react-router-dom';
 import Home from './Home.jsx';
 import './App.css';
 
+const API_BASE_URL =
+  import.meta.env.VITE_API_BASE_URL ||
+  'http://localhost:5000';
+
 function CineFindPage() {
   const [search, setSearch] = useState('');
   const [movies, setMovies] = useState([]);
@@ -69,7 +73,7 @@ const handleSearch = async () => {
 
   try {
     const response = await fetch(
-      `http://localhost:5000/api/search?query=${encodeURIComponent(query)}`
+      `${API_BASE_URL}/api`/search?query=${encodeURIComponent(query)}`
     );
 
     if (!response.ok) {
@@ -128,7 +132,7 @@ const handleShowTV = async () => {
   setError('');
 
   try {
-    const response = await fetch('http://localhost:5000/api/tv');
+    const response = await fetch(`${API_BASE_URL}/api/tv');
 
     if (!response.ok) {
       throw new Error('Could not load TV shows.');
@@ -169,7 +173,7 @@ const [popularTV, setPopularTV] = useState([]);
 useEffect(() => {
   async function fetchMovies() {
     try {
-      const response = await fetch('http://localhost:5000/api/movies');
+      const response = await fetch(`${API_BASE_URL}/api/movies');
 
       if (!response.ok) {
         throw new Error('Could not load movies.');
@@ -199,7 +203,7 @@ useEffect(() => {
   ];
 
   useEffect(() => {
-  fetch('http://localhost:5000/api/popular-movies')
+  fetch(`${API_BASE_URL}/api/popular-movies')
     .then((response) => {
       if (!response.ok) throw new Error('Popular movies failed to load');
       return response.json();
@@ -207,7 +211,7 @@ useEffect(() => {
     .then((data) => setPopularMovies(data.results || []))
     .catch((error) => console.error(error));
 
-  fetch('http://localhost:5000/api/popular-tv')
+  fetch(`${API_BASE_URL}/api/popular-tv')
     .then((response) => {
       if (!response.ok) throw new Error('Popular TV failed to load');
       return response.json();
@@ -335,7 +339,7 @@ useEffect(() => {
       <Container maxWidth="xl" className="page-container">
         <Box className="welcome-section">
           <Typography className="eyebrow">
-            YOUR NEXT FAVOURITE STARTS HERE
+            YOUR NEXT FAVOURITE HERE
           </Typography>
 
           <Typography variant="h2" className="hero-title">
@@ -481,7 +485,7 @@ useEffect(() => {
 
     
 fetch(
-  `http://localhost:5000/api/${
+  '${API_BASE_URL}/api/${
     movie.media_type === 'tv' ||
     (!movie.title && movie.name)
       ? 'tv'
