@@ -554,7 +554,7 @@ fetch(
 
             <Box className="coming-section">
               <Typography variant="h6">
-                Ready to explore?
+                Ready to explore your best shows?
               </Typography>
               <Typography className="section-subtitle">
               </Typography>
