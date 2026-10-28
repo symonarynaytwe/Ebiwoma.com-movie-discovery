@@ -40,7 +40,7 @@ const API_BASE_URL =
   import.meta.env.VITE_API_BASE_URL ||
   'http://localhost:5000';
 
-function CineFindPage() {
+function Ebiwoma_comPage() {
   const [search, setSearch] = useState('');
   const [movies, setMovies] = useState([]);
 const [loading, setLoading] = useState(true);
@@ -51,7 +51,7 @@ const [detailsLoading, setDetailsLoading] = useState(false);
 
 const [watchlist, setWatchlist] = useState(() => {
   try {
-    return JSON.parse(localStorage.getItem('cinefind-watchlist')) || [];
+    return JSON.parse(localStorage.getItem('Ebiwoma_com-watchlist')) || [];
   } catch {
     return [];
   }
@@ -73,7 +73,9 @@ const handleSearch = async () => {
 
   try {
     const response = await fetch(
-      `${API_BASE_URL}/api`/search?query=${encodeURIComponent(query)}`
+      
+`${API_BASE_URL}/api/search?query=${encodeURIComponent(query)}`
+
     );
 
     if (!response.ok) {
@@ -132,7 +134,7 @@ const handleShowTV = async () => {
   setError('');
 
   try {
-    const response = await fetch(`${API_BASE_URL}/api/tv');
+    const response = await fetch(`${API_BASE_URL}/api/tv`);
 
     if (!response.ok) {
       throw new Error('Could not load TV shows.');
@@ -173,7 +175,7 @@ const [popularTV, setPopularTV] = useState([]);
 useEffect(() => {
   async function fetchMovies() {
     try {
-      const response = await fetch(`${API_BASE_URL}/api/movies');
+      const response = await fetch(`${API_BASE_URL}/api/movies`);
 
       if (!response.ok) {
         throw new Error('Could not load movies.');
@@ -192,7 +194,7 @@ useEffect(() => {
   fetchMovies();
 }, []);
 useEffect(() => {
-  localStorage.setItem('cinefind-watchlist', JSON.stringify(watchlist));
+  localStorage.setItem('Ebiwoma_com-watchlist', JSON.stringify(watchlist));
 }, [watchlist]);
 
   const menuItems = [
@@ -203,7 +205,7 @@ useEffect(() => {
   ];
 
   useEffect(() => {
-  fetch(`${API_BASE_URL}/api/popular-movies')
+  fetch(`${API_BASE_URL}/api/popular-movies`)
     .then((response) => {
       if (!response.ok) throw new Error('Popular movies failed to load');
       return response.json();
@@ -211,7 +213,7 @@ useEffect(() => {
     .then((data) => setPopularMovies(data.results || []))
     .catch((error) => console.error(error));
 
-  fetch(`${API_BASE_URL}/api/popular-tv')
+  fetch(`${API_BASE_URL}/api/popular-tv`)
     .then((response) => {
       if (!response.ok) throw new Error('Popular TV failed to load');
       return response.json();
@@ -227,7 +229,7 @@ useEffect(() => {
           <Box className="brand">
             <MovieOutlinedIcon className="brand-icon" />
             <Typography variant="h5" component="h1">
-              Cine<span>Find</span>
+              Ebiwoma.<span>com</span>
             </Typography>
             </Box>
 
@@ -485,7 +487,7 @@ useEffect(() => {
 
     
 fetch(
-  '${API_BASE_URL}/api/${
+  `${API_BASE_URL}/api/${
     movie.media_type === 'tv' ||
     (!movie.title && movie.name)
       ? 'tv'
@@ -666,7 +668,7 @@ fetch(
 function App() {
   return (
     <Routes>
-      <Route path="/*" element={<CineFindPage />} />
+      <Route path="/*" element={<Ebiwoma_comPage />} />
     </Routes>
   );
 }
