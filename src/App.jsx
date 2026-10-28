@@ -102,8 +102,8 @@ const handleGenreChange = async (genreId) => {
 
   try {
     const url = genreId
-      ? `http://localhost:5000/api/genre/${genreId}`
-      : 'http://localhost:5000/api/movies';
+      ? `${API_BASE_URL}/api/genre/${genreId}`
+      : '${API_BASE_URL}/api/movies';
 
     const response = await fetch(url);
 
@@ -404,13 +404,13 @@ useEffect(() => {
     {popularMovies.slice(0, 4).map((movie) => (
       <Card className="movie-card" key={movie.id}>
         {movie.poster_path ? (
-          <CardMedia
-            component="img"
-            image={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-            alt={movie.title || 'Movie poster'}
-            className="movie-poster"
-          />
-        ) : null}
+  <CardMedia
+    component="img"
+    image={"https://image.tmdb.org/t/p/w500" + movie.poster_path}
+    alt={movie.title || "Movie poster"}
+    className="movie-poster"
+  />
+) : null}
         <CardContent>
           <Typography variant="subtitle1">
             {movie.title || 'Untitled'}
@@ -434,13 +434,13 @@ useEffect(() => {
     {popularTV.slice(0, 4).map((show) => (
       <Card className="movie-card" key={show.id}>
         {show.poster_path ? (
-          <CardMedia
-            component="img"
-            image={`https://image.tmdb.org/t/p/w500${show.poster_path}`}
-            alt={show.name || 'TV show poster'}
-            className="movie-poster"
-          />
-        ) : null}
+  <CardMedia
+    component="img"
+    image={"https://image.tmdb.org/t/p/w500" + show.poster_path}
+    alt={show.name || "TV show poster"}
+    className="movie-poster"
+  />
+) : null}
         <CardContent>
           <Typography variant="subtitle1">
             {show.name || 'Untitled'}
