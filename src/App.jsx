@@ -105,7 +105,7 @@ const handleGenreChange = async (genreId) => {
   try {
     const url = genreId
       ? `${API_BASE_URL}/api/genre/${genreId}`
-      : '${API_BASE_URL}/api/movies';
+      : `${API_BASE_URL}/api/movies`;
 
     const response = await fetch(url);
 
@@ -149,6 +149,31 @@ const handleShowTV = async () => {
     setLoading(false);
   }
 };
+
+const handleShowMovies = async () => {
+  setShowWatchlist(false);
+  setSelectedGenre('');
+  setSearch('');
+  setLoading(true);
+  setError('');
+
+  try {
+    const response = await fetch(`${API_BASE_URL}/api/movies`);
+
+    if (!response.ok) {
+      throw new Error('Could not load movies.');
+    }
+
+    const data = await response.json();
+    setMovies(data.results || []);
+  } catch (error) {
+    console.error('Movies loading error:', error);
+    setError('Could not load movies. Please try again.');
+  } finally {
+    setLoading(false);
+  }
+};
+
 
 const toggleWatchlist = (movie) => {
   setWatchlist((currentList) => {
@@ -248,18 +273,24 @@ useEffect(() => {
         component={Link}
         to={paths[item.label]}
         startIcon={item.icon}
-        onClick={() => {
-          if (item.label === 'TV Shows') {
-            handleShowTV();
-          } else if (item.label === 'My Watchlist') {
-            setShowWatchlist(true);
-          } else {
-            setShowWatchlist(false);
-            setSelectedGenre('');
-            setSearch('');
-            handleGenreChange('');
-          }
-        }}
+        
+
+onClick={() => {
+  if (item.label === 'TV Shows') {
+    handleShowTV();
+  } else if (item.label === 'Movies') {
+    handleShowMovies();
+  } else if (item.label === 'My Watchlist') {
+    setShowWatchlist(true);
+  } else {
+    setShowWatchlist(false);
+    setSelectedGenre('');
+    setSearch('');
+    handleShowMovies();
+  }
+}}
+
+
       >
         {item.label}
       </Button>
