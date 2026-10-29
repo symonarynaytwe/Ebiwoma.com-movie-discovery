@@ -120,60 +120,13 @@ body {
 }
 
 .content-layout {
-  display: grid;
-  grid-template-columns: 220px minmax(0, 1fr);
-  gap: 36px;
+  display: block;
+  width: 100%;
 }
 
-.sidebar {
-  padding-right: 20px;
-  border-right: 1px solid #263047;
-}
-
-.sidebar-heading,
-.section-label {
-  color: #8390aa !important;
-  font-size: 11px !important;
-  font-weight: 700 !important;
-  letter-spacing: 1.6px !important;
-  margin-bottom: 16px !important;
-}
-
-.menu-button {
-  justify-content: flex-start !important;
-  padding: 13px 14px !important;
-  margin-bottom: 8px !important;
-  color: #aab5cb !important;
-  text-transform: none !important;
-  border-radius: 10px !important;
-}
-
-.menu-button .MuiButton-startIcon {
-  margin-right: 13px;
-}
-
-.menu-button:hover,
-.menu-button.active {
-  color: #55e6cf !important;
-  background: #172b39 !important;
-}
-
-.sidebar-note {
-  margin-top: 45px;
-  padding: 18px;
-  border: 1px solid #303a51;
-  border-radius: 14px;
-  background: #111a2b;
-}
-
-.sidebar-note .MuiTypography-subtitle2 {
-  color: #ffffff;
-  margin-bottom: 8px;
-}
-
-.sidebar-note .MuiTypography-body2 {
-  color: #a9b4cb;
-  line-height: 1.6;
+.content-layout > * {
+  width: 100%;
+  min-width: 0;
 }
 
 .main-content {
@@ -303,12 +256,16 @@ body {
   .toolbar {
     gap: 14px;
   }
+  
+.content-layout {
+  display: block;
+  width: 100%;
+}
 
-  .content-layout {
-    grid-template-columns: 180px minmax(0, 1fr);
-    gap: 22px;
-  }
-
+.content-layout > * {
+  width: 100%;
+  min-width: 0;
+}
   .movie-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -354,36 +311,16 @@ body {
     font-size: 14px !important;
   }
 
-  .content-layout {
-    grid-template-columns: 1fr;
-    gap: 28px;
-  }
+  
+.content-layout {
+  display: block;
+  width: 100%;
+}
 
-  .sidebar {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    padding: 0 0 16px;
-    border-right: none;
-    border-bottom: 1px solid #263047;
-  }
-
-  .sidebar-heading {
-    flex-basis: 100%;
-    margin-bottom: 8px !important;
-  }
-
-  .menu-button {
-    width: auto !important;
-    padding: 9px 10px !important;
-    margin: 0 !important;
-    font-size: 12px !important;
-  }
-
-  .sidebar-note,
-  .section-label {
-    display: none;
-  }
+.content-layout > * {
+  width: 100%;
+  min-width: 0;
+}
 
   .movie-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));

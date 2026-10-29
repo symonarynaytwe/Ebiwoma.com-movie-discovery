@@ -41,6 +41,12 @@ const API_BASE_URL =
   'http://localhost:5000';
 
 function Ebiwoma_comPage() {
+  const paths = {
+  Home: '/',
+  Movies: '/movies',
+  'TV Shows': '/tv',
+  'My Watchlist': '/watchlist',
+};
   const [search, setSearch] = useState('');
   const [movies, setMovies] = useState([]);
 const [loading, setLoading] = useState(true);
@@ -258,44 +264,32 @@ useEffect(() => {
             </Typography>
             </Box>
 
-            <Box className="nav-buttons">
-  {menuItems.map((item) => {
-    const paths = {
-      Home: '/',
-      Movies: '/movies',
-      'TV Shows': '/tv',
-      'My Watchlist': '/watchlist',
-    };
-
-    return (
-      <Button
-        key={item.label}
-        component={Link}
-        to={paths[item.label]}
-        startIcon={item.icon}
-        
-
-onClick={() => {
-  if (item.label === 'TV Shows') {
-    handleShowTV();
-  } else if (item.label === 'Movies') {
-    handleShowMovies();
-  } else if (item.label === 'My Watchlist') {
-    setShowWatchlist(true);
-  } else {
-    setShowWatchlist(false);
-    setSelectedGenre('');
-    setSearch('');
-    handleShowMovies();
-  }
-}}
-
-
-      >
-        {item.label}
-      </Button>
-    );
-  })}
+            
+<Box className="nav-buttons">
+  {menuItems.map((item) => (
+    <Button
+      key={item.label}
+      component={Link}
+      to={paths[item.label]}
+      startIcon={item.icon}
+      onClick={() => {
+        if (item.label === 'TV Shows') {
+          handleShowTV();
+        } else if (item.label === 'Movies') {
+          handleShowMovies();
+        } else if (item.label === 'My Watchlist') {
+          setShowWatchlist(true);
+        } else {
+          setShowWatchlist(false);
+          setSelectedGenre('');
+          setSearch('');
+          handleShowMovies();
+        }
+      }}
+    >
+      {item.label}
+    </Button>
+  ))}
 </Box>
           
 <TextField
@@ -388,34 +382,6 @@ onClick={() => {
         </Box>
 
         <Box className="content-layout">
-          <Box component="aside" className="sidebar">
-            <Typography className="sidebar-heading">
-              DISCOVER
-            </Typography>
-
-            {menuItems.map((item) => (
-              <Button
-                key={item.label}
-                className={`menu-button ${
-                  item.label === 'Home' ? 'active' : ''
-                }`}
-                startIcon={item.icon}
-                fullWidth
-              >
-                {item.label}
-              </Button>
-            ))}
-
-            <Box className="sidebar-note">
-              <Typography variant="subtitle2">
-                Movie night?
-              </Typography>
-              <Typography variant="body2">
-                Find something worth watching.
-              </Typography>
-            </Box>
-          </Box>
-
           <Box component="main" className="main-content">
             <Box className="section-heading">
               <Box>
